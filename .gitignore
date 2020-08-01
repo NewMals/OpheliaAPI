@@ -1,0 +1,18 @@
+﻿################################################################################
+# Este archivo .gitignore ha sido creado automáticamente por Microsoft(R) Visual Studio.
+################################################################################
+
+/Ophelia/Ophelia/obj
+/Ophelia/.vs/Ophelia/v16
+/Ophelia/API.Ophelia/obj
+/Ophelia/DTOs.Ophelia/obj
+/Ophelia/Infraestructura/obj
+/Ophelia/Servicios.Ophelia/obj
+/Ophelia/Infraestructura/bin/Debug/netcoreapp3.1
+/Ophelia/Servicios.Ophelia/bin/Debug/netcoreapp2.1
+/Ophelia/Infraestructura/bin/Debug/netcoreapp2.1
+/Ophelia/DTOs.Ophelia/bin/Debug/netcoreapp2.1
+/Ophelia/API.Ophelia/bin/Debug/netcoreapp2.1
+/Ophelia/Global/bin/Debug/netcoreapp3.1
+/Ophelia/Global/obj
+/Ophelia/Global/bin/Debug/netcoreapp2.1
