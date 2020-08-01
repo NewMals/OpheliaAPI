@@ -86,7 +86,7 @@ namespace API.Ophelia
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            //Cargar middlawares para validacion de headers
+            //milddleware de error
             app.UseMiddleware(typeof(ErrorMilddleware));
 
             //Aplica configuración de CORS
