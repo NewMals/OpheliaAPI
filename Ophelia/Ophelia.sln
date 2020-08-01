@@ -7,11 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Ophelia", "API.Ophelia\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTOs.Ophelia", "DTOs.Ophelia\DTOs.Ophelia.csproj", "{3D942BA0-FFAE-411F-AE78-57B7D4C650D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructura.Ophelia", "Infraestructura\Infraestructura.Ophelia.csproj", "{B964F93C-C339-4D14-8687-404E17056461}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructura.Ophelia", "Infraestructura.Ophelia\Infraestructura.Ophelia.csproj", "{B964F93C-C339-4D14-8687-404E17056461}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiciosAplicacion.Ophelia", "Servicios.Ophelia\ServiciosAplicacion.Ophelia.csproj", "{F5C13212-14CE-4B79-8341-B32CC400374C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Global.Ophelia", "Global\Global.Ophelia.csproj", "{3DC10EE3-DE61-475A-AE13-B3A60C203829}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Global.Ophelia", "Global.Ophelia\Global.Ophelia.csproj", "{3DC10EE3-DE61-475A-AE13-B3A60C203829}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

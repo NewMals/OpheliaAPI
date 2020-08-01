@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Global\Global.Ophelia.csproj" />
+    <ProjectReference Include="..\Global.Ophelia\Global.Ophelia.csproj" />
   </ItemGroup>
 
 </Project>
