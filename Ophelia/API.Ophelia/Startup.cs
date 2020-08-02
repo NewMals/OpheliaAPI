@@ -1,6 +1,7 @@
 using API.Ophelia.Milddleware;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Global.Ophelia.Sesion;
 using Infraestructura;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,10 +36,12 @@ namespace API.Ophelia
             //Configura AutoFac para inyección de dependencias
             var builder = new ContainerBuilder();
 
+            services.AddScoped<IConstruirSesion, ConstruirSesion>();
+
             //Configura la inyección del contexto de base de datos
             try
             {
-                builder.RegisterType<ContextoFacturacion>();
+                builder.RegisterType<Contexto>();
             }
             catch (Exception ex)
             {

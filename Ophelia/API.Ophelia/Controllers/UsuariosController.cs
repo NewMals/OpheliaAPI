@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Global.Ophelia.Excepciones;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Servicios.Ophelia;
 
 namespace API.Ophelia.Controllers
 {
@@ -13,9 +14,10 @@ namespace API.Ophelia.Controllers
     [ApiController]
     public class UsuariosController : ControllerBase
     {
-        public UsuariosController()
+        readonly IServicioUsuarios servicioUsuarios;
+        public UsuariosController(IServicioUsuarios _servicioUsuarios)
         {
-
+            servicioUsuarios = _servicioUsuarios;
         }
 
         /// <summary>
@@ -25,17 +27,17 @@ namespace API.Ophelia.Controllers
         [HttpGet("ObtenerClientes")]
         public IActionResult ObtenerClientes()
         {
-            return Ok();
+            return Ok(servicioUsuarios.ObtenerClientes());
         }
 
         /// <summary>
         /// Obtener cliente por documento
         /// </summary>
         /// <returns></returns>
-        [HttpGet("ObtenerClientesPorDocumento")]
-        public IActionResult ObtenerClientesPorDocumento([FromQuery][Required] int? identificacion)
+        [HttpGet("ObtenerClientesPorIdentificacion")]
+        public IActionResult ObtenerClientesPorIdentificacion([FromQuery][Required] string identificacion)
         {
-            if(identificacion is null)
+            if(string.IsNullOrEmpty(identificacion))
             {
                 var excepcion = DiccionarioMensajes.Get().ParametroRequerido;
                 excepcion.Mensaje = $"identificacion: {excepcion.Mensaje}";
@@ -43,9 +45,20 @@ namespace API.Ophelia.Controllers
             }
             else
             {
-                return Ok();
+                return Ok(servicioUsuarios.ObtenerClientePorIdentificacion(identificacion));
             }
 
         }
+
+        /// <summary>
+        /// Obtener clientes registrados
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("ObtenerProveedores")]
+        public IActionResult ObtenerProveedores()
+        {
+            return Ok(servicioUsuarios.ObtenerProveedores());
+        }
+
     }
 }

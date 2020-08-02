@@ -11,4 +11,11 @@ namespace Global.Ophelia.Constantes
         public const string SchemaConfiguration = "OPH_SYS";
 
     }
+
+    public enum UsuariosRoles
+    {
+        Sistema = 1,
+        Cliente = 2,
+        Proveedor = 3
+    }
 }

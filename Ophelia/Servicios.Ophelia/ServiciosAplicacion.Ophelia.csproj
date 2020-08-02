@@ -4,4 +4,10 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DTOs.Ophelia\DTOs.Ophelia.csproj" />
+    <ProjectReference Include="..\Global.Ophelia\Global.Ophelia.csproj" />
+    <ProjectReference Include="..\Infraestructura.Ophelia\Infraestructura.Ophelia.csproj" />
+  </ItemGroup>
+
 </Project>

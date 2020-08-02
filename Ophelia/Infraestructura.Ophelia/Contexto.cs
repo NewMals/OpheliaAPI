@@ -1,18 +1,27 @@
-﻿using Infraestructura.Ophelia.Modelos.OPH;
+﻿using Global.Ophelia.Sesion;
+using Infraestructura.Ophelia.Modelos.OPH;
 using Infraestructura.Ophelia.Modelos.OPH_AUDIT;
 using Infraestructura.Ophelia.Modelos.OPH_SYS;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Extensions.Configuration;
 using System;
 
 namespace Infraestructura
 {
-    public class ContextoFacturacion: DbContext
+    public class Contexto: DbContext
     {
-        public ContextoFacturacion(DbContextOptions<ContextoFacturacion> options)
-            : base(options)
-        {
 
+        public Contexto(IConstruirSesion construirSesion)
+            : base(construirSesion.ObtenerContextOptions(new DbContextOptionsBuilder<Contexto>()))
+        {
+            if (!(Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Exists())
+            {
+                throw new Exception("No se ha creado la base de datos");
+            }
         }
+
 
         public DbSet<ProductosCompra> ProductosCompra { get; set; }
         public DbSet<ProductosInventario> ProductosInventario { get; set; }

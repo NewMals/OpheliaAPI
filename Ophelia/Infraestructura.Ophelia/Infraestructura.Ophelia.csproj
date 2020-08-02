@@ -9,10 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositorios\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\DTOs.Ophelia\DTOs.Ophelia.csproj" />
     <ProjectReference Include="..\Global.Ophelia\Global.Ophelia.csproj" />
   </ItemGroup>
 
