@@ -1,4 +1,5 @@
-﻿using DTOs.Ophelia.Usuarios;
+﻿using DTOs.Ophelia.General;
+using DTOs.Ophelia.Usuarios;
 using Global.Ophelia.Constantes;
 using Global.Ophelia.Excepciones;
 using Infraestructura.Ophelia.Repositorios;
@@ -15,7 +16,7 @@ namespace Servicios.Ophelia
         DTOUsuario ObtenerUsuariosPorId(int id);
         List<DTOUsuario> ObtenerProveedores();
         List<DTOUsuariosRoles> ObtenerRoles();
-        void CrearOModificarUsuario(DTOUsuario usuario);
+        DTOResultado CrearOModificarUsuario(DTOUsuario usuario);
     }
 
     class ServicioUsuarios : IServicioUsuarios
@@ -53,7 +54,7 @@ namespace Servicios.Ophelia
             return repositorioUsuarios.ObtenerUsuariosRoles().Where(w => !w.Interno).ToList();
         }
 
-        public void CrearOModificarUsuario(DTOUsuario usuario)
+        public DTOResultado CrearOModificarUsuario(DTOUsuario usuario)
         {
             var queryUsuario = ObtenerUsuariosPorIdentificacion(usuario.Identificacion);
             if (queryUsuario is null)
@@ -71,6 +72,11 @@ namespace Servicios.Ophelia
                 }          
                 repositorioUsuarios.Actualizar(usuario);
             }
+            return new DTOResultado()
+            {
+                Codigo = 1,
+                Mensaje = $"Usuario {usuario.Nombres} {usuario.Apellidos} guardado correctamente."
+            };
         }
     }
 }

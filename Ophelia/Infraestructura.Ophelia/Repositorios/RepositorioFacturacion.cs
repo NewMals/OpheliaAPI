@@ -12,6 +12,8 @@ namespace Infraestructura.Ophelia.Repositorios
     {
         List<DTOProductosCompra> ObtenerCompras();
         List<DTOProductosVenta> ObtenerVentas();
+        int CrearCompra(DTOProductosCompra compra);
+        int CrearVenta(DTOProductosVenta venta);
     }
     class RepositorioFacturacion : IRepositorioFacturacion
     {
@@ -32,6 +34,21 @@ namespace Infraestructura.Ophelia.Repositorios
             return contexto.ProductosVenta.Select(s => DePersistenciaADTOVenta(s)).ToList();
         }
 
+        public int CrearCompra(DTOProductosCompra compra)
+        {
+            var facturaCompra = DeDTOAPersistenciaCompra(compra);
+            contexto.ProductosCompra.Add(facturaCompra);
+            contexto.SaveChanges();
+            return facturaCompra.Id;
+        }
+
+        public int CrearVenta(DTOProductosVenta venta)
+        {
+            var facturaVenta = DeDTOAPersistenciaVenta(venta);
+            contexto.ProductosVenta.Add(facturaVenta);
+            contexto.SaveChanges();
+            return facturaVenta.Id;
+        }
 
         private DTOProductosCompra DePersistenciaADTOCompra(ProductosCompra compra)
         {
@@ -58,6 +75,34 @@ namespace Infraestructura.Ophelia.Repositorios
                 FechaVenta = compra.FechaVenta,
                 ValorTotal = compra.ValorTotal,
                 ValorUnitario = compra.ValorUnitario
+            };
+        }
+
+        private ProductosCompra DeDTOAPersistenciaCompra(DTOProductosCompra compra)
+        {
+            return new ProductosCompra()
+            {
+                Id = compra.Id,
+                CodigoProducto = compra.CodigoProducto,
+                Proveedor = compra.Proveedor,
+                Cantidad = compra.Cantidad,
+                FechaCompra = compra.FechaCompra,
+                ValorTotal = compra.ValorTotal,
+                ValorUnitario = compra.ValorUnitario
+            };
+        }
+
+        private ProductosVenta DeDTOAPersistenciaVenta(DTOProductosVenta venta)
+        {
+            return new ProductosVenta()
+            {
+                Id = venta.Id,
+                CodigoProducto = venta.CodigoProducto,
+                Cliente = venta.Cliente,
+                Cantidad = venta.Cantidad,
+                FechaVenta = venta.FechaVenta,
+                ValorTotal = venta.ValorTotal,
+                ValorUnitario = venta.ValorUnitario
             };
         }
     }

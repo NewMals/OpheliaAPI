@@ -32,7 +32,17 @@ namespace API.Ophelia.Controllers
         }
 
         /// <summary>
-        /// Obtener cliente por documento
+        /// Obtener proveedores registrados
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("ObtenerProveedores")]
+        public IActionResult ObtenerProveedores()
+        {
+            return Ok(servicioUsuarios.ObtenerProveedores());
+        }
+
+        /// <summary>
+        /// Obtener usuario por documento
         /// </summary>
         /// <returns></returns>
         [HttpGet("ObtenerUsuariosPorIdentificacion")]
@@ -52,16 +62,6 @@ namespace API.Ophelia.Controllers
         }
 
         /// <summary>
-        /// Obtener proveedores registrados
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet("ObtenerProveedores")]
-        public IActionResult ObtenerProveedores()
-        {
-            return Ok(servicioUsuarios.ObtenerProveedores());
-        }
-
-        /// <summary>
         /// Obtener roles
         /// </summary>
         [HttpGet("ObtenerRoles")]
@@ -71,15 +71,15 @@ namespace API.Ophelia.Controllers
         }
 
         /// <summary>
-        /// Obtener roles
+        /// Crear o modificar usuariio
         /// </summary>
         [HttpPost("CrearOModificarUsuario")]
         public IActionResult CrearOModificarUsuario([FromBody] DTOUsuario usuario)
         {
             if (ModelState.IsValid)
             {
-                servicioUsuarios.CrearOModificarUsuario(usuario);
-                return Ok("Usuario guardado correctamente.");
+                ;
+                return Ok(servicioUsuarios.CrearOModificarUsuario(usuario));
             }
             else
             {
