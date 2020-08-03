@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using DTOs.Ophelia.Usuarios;
 using Global.Ophelia.Excepciones;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -34,8 +35,8 @@ namespace API.Ophelia.Controllers
         /// Obtener cliente por documento
         /// </summary>
         /// <returns></returns>
-        [HttpGet("ObtenerClientesPorIdentificacion")]
-        public IActionResult ObtenerClientesPorIdentificacion([FromQuery][Required] string identificacion)
+        [HttpGet("ObtenerUsuariosPorIdentificacion")]
+        public IActionResult ObtenerUsuariosPorIdentificacion([FromQuery][Required] string identificacion)
         {
             if(string.IsNullOrEmpty(identificacion))
             {
@@ -45,13 +46,13 @@ namespace API.Ophelia.Controllers
             }
             else
             {
-                return Ok(servicioUsuarios.ObtenerClientePorIdentificacion(identificacion));
+                return Ok(servicioUsuarios.ObtenerUsuariosPorIdentificacion(identificacion));
             }
 
         }
 
         /// <summary>
-        /// Obtener clientes registrados
+        /// Obtener proveedores registrados
         /// </summary>
         /// <returns></returns>
         [HttpGet("ObtenerProveedores")]
@@ -60,5 +61,31 @@ namespace API.Ophelia.Controllers
             return Ok(servicioUsuarios.ObtenerProveedores());
         }
 
+        /// <summary>
+        /// Obtener roles
+        /// </summary>
+        [HttpGet("ObtenerRoles")]
+        public IActionResult ObtenerRoles()
+        {
+            return Ok(servicioUsuarios.ObtenerRoles());
+        }
+
+        /// <summary>
+        /// Obtener roles
+        /// </summary>
+        [HttpPost("CrearOModificarUsuario")]
+        public IActionResult CrearOModificarUsuario([FromBody] DTOUsuario usuario)
+        {
+            if (ModelState.IsValid)
+            {
+                servicioUsuarios.CrearOModificarUsuario(usuario);
+                return Ok("Usuario guardado correctamente.");
+            }
+            else
+            {
+                throw new CustomException(Validaciones.ValidacionesDto(ModelState));
+            }
+
+        }
     }
 }

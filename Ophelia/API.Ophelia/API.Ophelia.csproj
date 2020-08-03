@@ -9,6 +9,8 @@
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="5.3.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="5.3.3" />
   </ItemGroup>
 
   <ItemGroup>

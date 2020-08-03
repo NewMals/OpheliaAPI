@@ -21,7 +21,10 @@ namespace Global.Ophelia.Excepciones
         public static int Forbidden = StatusCodes.Status403Forbidden;
         public static int PreconditionFailed = StatusCodes.Status412PreconditionFailed;
 
-        public readonly Excepcion ParametroRequerido = Excepcion.GetExcepcion(PreconditionFailed, 1, "Parametro no enviado.");
+        public readonly Excepcion AnotacionesNoControladas = Excepcion.GetExcepcion(PreconditionFailed, 100, "Excepción no controlada: {0}.");
+        public readonly Excepcion ParametroRequerido = Excepcion.GetExcepcion(PreconditionFailed, 101, "Parametro no enviado.");
+        public readonly Excepcion PropiedadRequerida = Excepcion.GetExcepcion(PreconditionFailed, 102, "Propiedad vacia o no enviada.");
+        public readonly Excepcion ExisteUsuario = Excepcion.GetExcepcion(PreconditionFailed, 103, "El usuario con identificación {0}, ya se encuentra registrado");
 
     }
 

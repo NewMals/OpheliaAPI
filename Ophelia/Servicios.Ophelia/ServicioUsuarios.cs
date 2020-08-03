@@ -1,5 +1,6 @@
 ﻿using DTOs.Ophelia.Usuarios;
 using Global.Ophelia.Constantes;
+using Global.Ophelia.Excepciones;
 using Infraestructura.Ophelia.Repositorios;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,11 @@ namespace Servicios.Ophelia
     public interface IServicioUsuarios
     {
         List<DTOUsuario> ObtenerClientes();
-        DTOUsuario ObtenerClientePorIdentificacion(string identificacion);
+        DTOUsuario ObtenerUsuariosPorIdentificacion(string identificacion);
+        DTOUsuario ObtenerUsuariosPorId(int id);
         List<DTOUsuario> ObtenerProveedores();
+        List<DTOUsuariosRoles> ObtenerRoles();
+        void CrearOModificarUsuario(DTOUsuario usuario);
     }
 
     class ServicioUsuarios : IServicioUsuarios
@@ -29,14 +33,44 @@ namespace Servicios.Ophelia
         }
 
 
-        public DTOUsuario ObtenerClientePorIdentificacion(string identificacion)
+        public DTOUsuario ObtenerUsuariosPorIdentificacion(string identificacion)
         {
-            return repositorioUsuarios.ObtenerUsuarios().Where(w => w.Rol == (int)UsuariosRoles.Cliente && w.Identificacion == identificacion).FirstOrDefault();
+            return repositorioUsuarios.ObtenerUsuarioPorIdentificacion(identificacion);
+        }
+
+        public DTOUsuario ObtenerUsuariosPorId(int id)
+        {
+            return repositorioUsuarios.ObtenerUsuariosPorId(id);
         }
 
         public List<DTOUsuario> ObtenerProveedores()
         {
             return repositorioUsuarios.ObtenerUsuarios().Where(w => w.Rol == (int)UsuariosRoles.Proveedor).ToList();
+        }
+
+        public List<DTOUsuariosRoles> ObtenerRoles()
+        {
+            return repositorioUsuarios.ObtenerUsuariosRoles().Where(w => !w.Interno).ToList();
+        }
+
+        public void CrearOModificarUsuario(DTOUsuario usuario)
+        {
+            var queryUsuario = ObtenerUsuariosPorIdentificacion(usuario.Identificacion);
+            if (queryUsuario is null)
+            {
+                usuario.FechaRegistro = DateTime.Now;
+                repositorioUsuarios.CrearUsuario(usuario);
+            }
+            else
+            {
+                if (queryUsuario.Identificacion != usuario.Identificacion)
+                {
+                    var excepcion = DiccionarioMensajes.Get().ExisteUsuario;
+                    excepcion.Mensaje = excepcion.Mensaje.Replace("{0}", usuario.Identificacion);
+                    throw new CustomException(excepcion);
+                }          
+                repositorioUsuarios.Actualizar(usuario);
+            }
         }
     }
 }
